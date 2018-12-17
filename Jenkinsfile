@@ -10,7 +10,7 @@ pipeline{
         stage('Deploy Wordpress'){
             steps{
                 sh 'helm install --name wp-k8s --set wordpressUsername=admin,wordpressPassword=password,mariadb.mariadbRootPassword=secretpassword,wordpressBlogName=Blog stable/wordpress'
-                sh 'sleep 30'
+                sh './scripts/wait.sh wp-k8s-wordpress'
             }
         }
     }
