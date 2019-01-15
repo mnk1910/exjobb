@@ -44,7 +44,7 @@ kubectl get secret --namespace default wp-k8s-wordpress -o jsonpath="{.data.word
 
 ### access wordpress
 ```console
-minikube service wordpress --url
+minikube service wp-k8s-wordpress --url
 ```
 
 ### deploy jenkins
