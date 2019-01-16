@@ -43,8 +43,10 @@ pipeline{
                     # get the URL for the wordpress installation
                     WORDPRESS=wp-k8s-wordpress.default.svc.cluster.local
 
-                    # send a POST request to the wordpress API
-                    curl -s -X DELETE --user admin:password "${WORDPRESS}/wp-json/wp/v2/users/2?reassign=1&force=true" | jq .
+                    # send a DELETE request to the wordpress API
+                    for id in $(curl -s -X GET --user admin:password "${WORDPRESS}/wp-json/wp/v2/users/" | jq -r '.[]| "\\(.name) \\(.id)"' | grep user | awk '{print $2}'); do
+                        curl -s -X DELETE --user admin:password "${WORDPRESS}/wp-json/wp/v2/users/${id}?reassign=1&force=true" | jq .
+                    done
                 '''
             }
         }
