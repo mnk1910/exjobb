@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Create two users'){
             steps{
-                bash '''
+                sh '''#!/bin/bash
                     # fail if there is an error in the pipe
                     set -o pipefail
 
@@ -21,7 +21,7 @@ pipeline{
 
         stage('List all users'){
             steps{
-                bash '''
+                sh '''#!/bin/bash
                     # fail if there is an error in the pipe
                     set -o pipefail
 
