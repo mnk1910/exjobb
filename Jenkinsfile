@@ -3,12 +3,12 @@ pipeline{
     stages{
         stage('Create two users'){
             steps{
-                sh '''
+                bash '''
                     # fail if there is an error in the pipe
                     set -o pipefail
 
                     # get the URL for the wordpress installation
-                    WORDPRESS=$(minikube service wp-k8s-wordpress --url | head -1)
+                    WORDPRESS=wp-k8s-wordpress.default.svc.cluster.local
 
                     for i in {1..2}
                     do
@@ -21,7 +21,7 @@ pipeline{
 
         stage('List all users'){
             steps{
-                sh '''
+                bash '''
                     # fail if there is an error in the pipe
                     set -o pipefail
 
