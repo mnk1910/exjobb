@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage('Create two users'){
+        stage('Create five users'){
             steps{
                 sh '''#!/bin/bash
                     # fail if there is an error in the pipe
@@ -10,7 +10,7 @@ pipeline{
                     # get the URL for the wordpress installation
                     WORDPRESS=wp-k8s-wordpress.default.svc.cluster.local
 
-                    for i in {1..2}
+                    for i in {1..5}
                     do
                         # send a POST request to the wordpress API
                         curl -s -X POST --user admin:password "${WORDPRESS}/wp-json/wp/v2/users/?username=user${i}&email=user${i}@example.com&password=password" | jq .
@@ -34,7 +34,7 @@ pipeline{
             }
         }
 
-        stage('Delete two users'){
+        stage('Delete five users'){
             steps{
                 sh '''#!/bin/bash
                     # fail if there is an error in the pipe
